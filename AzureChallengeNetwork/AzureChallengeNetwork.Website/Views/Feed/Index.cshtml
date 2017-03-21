@@ -1,0 +1,48 @@
+﻿@using AzureChallengeNetwork.Website.Entities
+@model AzureChallengeNetwork.Website.Models.FeedViewModel
+@{
+    ViewBag.Title = "Feed";
+}
+
+
+<div class="row">
+    <div class="col-md-8 col-lg-push-2">
+        <h3>Create a post</h3>
+          
+        @using (Html.BeginForm("Save", "Feed", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.TextAreaFor(m => m.ShareUpdateForm.Message, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ShareUpdateForm.Message, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Share" class="btn btn-success" />
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-push-2">
+        <h2>Feed</h2>
+        
+        @foreach (Userpost userPost in Model.UserPosts)
+        {
+            <section>
+                <p>
+                    <strong>@userPost.CreationDateTime.ToLongDateString() @userPost.CreationDateTime.ToLongTimeString():</strong><br/>
+                    @userPost.Text
+                </p>
+                <hr/>
+            </section>
+        }
+
+    </div>
+</div>
