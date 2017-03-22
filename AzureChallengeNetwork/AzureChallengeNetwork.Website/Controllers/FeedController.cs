@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AzureChallengeNetwork.Website.Context;
 using AzureChallengeNetwork.Website.Entities;
 using AzureChallengeNetwork.Website.Models;
+using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -14,18 +15,18 @@ namespace AzureChallengeNetwork.Website.Controllers
 {
     public class FeedController : Controller
     {
-        private string _storageConnectionString { get; set; }
+        private readonly string _serviceBusConnectionString;
+        private readonly string _storageConnectionString;
 
         public FeedController()
         {
             _storageConnectionString = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
+            _serviceBusConnectionString = ConfigurationManager.ConnectionStrings["ServiceBusConnectionString"].ConnectionString;
         }
 
         public ActionResult Index()
         {
             var viewModel = new FeedViewModel();
-
-            
 
             // Connect to the Azure Table
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
@@ -44,7 +45,6 @@ namespace AzureChallengeNetwork.Website.Controllers
                     TableQuery<ImagePost> exQuery = new TableQuery<ImagePost>().Where(searchQuery);
 
                     List<ImagePost> results = table.ExecuteQuery(exQuery).ToList();
-
 
                     var postModel = new PostModel
                     {
@@ -111,6 +111,11 @@ namespace AzureChallengeNetwork.Website.Controllers
                 table.CreateIfNotExists();
                 TableOperation insertOperation = TableOperation.Insert(imagePost);
                 TableResult result = table.Execute(insertOperation);
+
+                // Add message to Service Bus Topic
+                MessagingFactory messagingFactory = MessagingFactory.CreateFromConnectionString(_serviceBusConnectionString);
+                MessageSender messageSender = messagingFactory.CreateMessageSender("social");
+                messageSender.Send(new BrokeredMessage($"{postId}|{imageId}"));
 
             }
 

@@ -50,9 +50,9 @@
                 @if (userPost.ImagePosts.Any())
                 {
                
-                    foreach (var image in userPost.ImagePosts)
+                    foreach (var image in userPost.ImagePosts.Where(a => a.HasThumbnail))
                     {
-                        <img src="@($"https://henkboelman.blob.core.windows.net/images/{image.Filename}")"  class="img-thumbnail"/>
+                        <img src="@($"https://henkboelman.blob.core.windows.net/images/{image.ThumbnailFilename}")"  class="img-thumbnail"/>
                     }
                 }
                 <hr/>

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.Website", "AzureChallengeNetwork.Website\AzureChallengeNetwork.Website.csproj", "{C2F2B1A3-DB40-45A5-B5F7-38359368481E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.WebJob.ImageResizer", "AzureChallengeNetwork.WebJob.ImageResizer\AzureChallengeNetwork.WebJob.ImageResizer.csproj", "{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C2F2B1A3-DB40-45A5-B5F7-38359368481E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2F2B1A3-DB40-45A5-B5F7-38359368481E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2F2B1A3-DB40-45A5-B5F7-38359368481E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

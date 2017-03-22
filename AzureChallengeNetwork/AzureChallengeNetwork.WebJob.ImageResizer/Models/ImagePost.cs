@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureChallengeNetwork.Website.Entities
+namespace AzureChallengeNetwork.WebJob.ImageResizer.Models
 {
     public class ImagePost : TableEntity
     {
@@ -22,6 +18,7 @@ namespace AzureChallengeNetwork.Website.Entities
         public string Filename { get; set; }
 
         public bool HasThumbnail { get; set; }
+
         public string ThumbnailFilename { get; set; }
     }
 }
