@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace AzureChallengeNetwork.Website.Models
@@ -10,5 +7,8 @@ namespace AzureChallengeNetwork.Website.Models
     {
         [Required]
         public string Message { get; set; }
+
+        public HttpPostedFileBase Image { get; set; }
+
     }
 }

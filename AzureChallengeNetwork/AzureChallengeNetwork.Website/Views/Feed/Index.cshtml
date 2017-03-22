@@ -1,4 +1,5 @@
 ﻿@using AzureChallengeNetwork.Website.Entities
+@using AzureChallengeNetwork.Website.Models
 @model AzureChallengeNetwork.Website.Models.FeedViewModel
 @{
     ViewBag.Title = "Feed";
@@ -9,7 +10,7 @@
     <div class="col-md-8 col-lg-push-2">
         <h3>Create a post</h3>
           
-        @using (Html.BeginForm("Save", "Feed", FormMethod.Post))
+        @using (Html.BeginForm("Save", "Feed", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
 
@@ -18,6 +19,11 @@
             <div class="form-group">
                 @Html.TextAreaFor(m => m.ShareUpdateForm.Message, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.ShareUpdateForm.Message, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.ShareUpdateForm.Image, new { @type = "file" })
+                @Html.ValidationMessageFor(m => m.ShareUpdateForm.Image, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
@@ -33,13 +39,24 @@
     <div class="col-md-8 col-lg-push-2">
         <h2>Feed</h2>
         
-        @foreach (Userpost userPost in Model.UserPosts)
+        @foreach (PostModel userPost in Model.Posts)
         {
             <section>
                 <p>
-                    <strong>@userPost.CreationDateTime.ToLongDateString() @userPost.CreationDateTime.ToLongTimeString():</strong><br/>
-                    @userPost.Text
+                    <strong>@userPost.UserPost.CreationDateTime.ToLongDateString() @userPost.UserPost.CreationDateTime.ToLongTimeString():</strong><br/>
+                    @userPost.UserPost.Text
+                    
+                    @userPost.UserPost.Id
                 </p>
+
+                @if (userPost.ImagePosts.Any())
+                {
+               
+                    foreach (var image in userPost.ImagePosts)
+                    {
+                        <img src="@($"https://henkboelman.blob.core.windows.net/images/{image.Filename}")"  class="img-thumbnail"/>
+                    }
+                }
                 <hr/>
             </section>
         }
