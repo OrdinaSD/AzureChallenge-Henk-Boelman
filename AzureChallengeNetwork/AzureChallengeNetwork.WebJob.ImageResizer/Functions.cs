@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using AzureChallengeNetwork.WebJob.ImageResizer.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.ServiceBus.Messaging;
@@ -20,10 +14,10 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
 {
     public class Functions
     {
-        private const string topicName = "social";
-        private const string subscriptionName = "ImageResizer";
+        private const string TopicName = "social";
+        private const string SubscriptionName = "ImageResizer";
 
-        public static void ProcessQueueMessage([ServiceBusTrigger(topicName, subscriptionName)] BrokeredMessage message,
+        public static void ProcessQueueMessage([ServiceBusTrigger(TopicName, SubscriptionName)] BrokeredMessage message,
             TextWriter logger)
         {
             var storageConnectionString = ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ConnectionString;
@@ -32,7 +26,6 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
 
             string partitionKey = topicMessage.Split('|')[0];
             string rowKey = topicMessage.Split('|')[1];
-
 
             // Connection to Table
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
@@ -44,9 +37,6 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
             TableOperation retrieveOperation = TableOperation.Retrieve<ImagePost>(partitionKey, rowKey);
             TableResult retrievedResult = table.Execute(retrieveOperation);
             ImagePost imagePost = (ImagePost) retrievedResult.Result;
-
-            //Scale it
-        //    CloudStorageAccount storageAccount = CloudStorageAccount.Parse();
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
@@ -61,7 +51,7 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
                 blockBlob.DownloadToStream(inputStream);
                 using (Stream output = blockBlobOut.OpenWrite())
                 {
-                    ConvertImageToThumbnailJPG(inputStream, output);
+                    ConvertImageToThumbnailJpg(inputStream, output);
                     blockBlobOut.Properties.ContentType = "image/jpeg";
                 }
             }
@@ -71,13 +61,12 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
             imagePost.ThumbnailFilename = "thumb_" + imagePost.Filename;
 
             TableOperation replaceOperation = TableOperation.Replace(imagePost);
-            TableResult result = table.Execute(replaceOperation);
+            table.Execute(replaceOperation);
 
             logger.WriteLine($"partitionKey: {partitionKey} | rowKey: {rowKey}  | {imagePost.Filename}");
         }
 
-
-        public static void ConvertImageToThumbnailJPG(Stream input, Stream output)
+        public static void ConvertImageToThumbnailJpg(Stream input, Stream output)
         {
             int thumbnailsize = 80;
             int width;
