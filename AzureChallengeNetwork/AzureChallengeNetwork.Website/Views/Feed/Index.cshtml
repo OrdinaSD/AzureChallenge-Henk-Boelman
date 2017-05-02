@@ -8,14 +8,13 @@
 
 <div class="row">
     <div class="col-md-8 col-lg-push-2">
-        <h3>Create a post</h3>
+        <h3>Hi @ViewBag.DisplayName</h3>
           
         @using (Html.BeginForm("Save", "Feed", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
 
-            @Html.AntiForgeryToken()
-
+       
             <div class="form-group">
                 @Html.TextAreaFor(m => m.ShareUpdateForm.Message, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.ShareUpdateForm.Message, "", new { @class = "text-danger" })
@@ -36,13 +35,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 col-lg-push-2">
+    <div class="col-md-6 col-lg-push-2">
         <h2>Feed</h2>
         
         @foreach (PostModel userPost in Model.Posts)
         {
             <section>
                 <p>
+                    @userPost.PostedByUser.DisplayName - 
                     <strong>@userPost.UserPost.CreationDateTime.ToLongDateString() @userPost.UserPost.CreationDateTime.ToLongTimeString():</strong><br/>
                     @userPost.UserPost.Text
                 </p>
@@ -59,5 +59,18 @@
             </section>
         }
 
+    </div>
+    
+    <div class="col-md-4 col-lg-push-2">
+        <h2>Friends</h2>
+        <ul>
+            @foreach (var friend in Model.Friends)
+            {
+                <li>
+                    @friend.DisplayName<br/>
+                    <small>@friend.ObjectId</small>
+                </li>
+            }
+        </ul>
     </div>
 </div>

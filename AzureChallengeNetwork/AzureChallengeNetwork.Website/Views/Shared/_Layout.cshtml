@@ -23,6 +23,21 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Feed", "Index", "Feed")</li>
                 </ul>
+                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("User Claims", "Claims", "Home")</li>
+                        <li>@Html.ActionLink("Sign Out", "Signout", "Account")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "SignOut", "Account")</li>
+                        <li>@Html.ActionLink("Sign In", "SignIn", "Account")</li>
+                    </ul>
+                }
+
             </div>
         </div>
     </div>

@@ -2,31 +2,56 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AzureChallengeNetwork.Website.Context;
 using AzureChallengeNetwork.Website.Entities;
 using AzureChallengeNetwork.Website.Models;
+using B2CGraphShell;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Table;
+using Newtonsoft.Json;
 
 namespace AzureChallengeNetwork.Website.Controllers
 {
+    [Authorize]
     public class FeedController : Controller
     {
         private readonly string _serviceBusConnectionString;
         private readonly string _storageConnectionString;
+        private readonly Guid _userObjectId;
+        private readonly B2CGraphClient _graphClient;
 
+       
         public FeedController()
         {
+            // Loading the connection strings
             _storageConnectionString = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
             _serviceBusConnectionString = ConfigurationManager.ConnectionStrings["ServiceBusConnectionString"].ConnectionString;
+
+            // Getting the ObjectId from the current user
+            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                _userObjectId = Guid.Parse(ClaimsPrincipal.Current.Claims.FirstOrDefault(a => a.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier").Value);
+            }
+
+            // Connecting to the Graph API
+            string clientId = ConfigurationManager.AppSettings["b2c:ClientId"];
+            string tenant = ConfigurationManager.AppSettings["b2c:Tenant"];
+            string clientSecret = ConfigurationManager.AppSettings["b2c:ClientSecret"];
+            _graphClient = new B2CGraphClient(clientId, clientSecret, tenant);
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var viewModel = new FeedViewModel();
+
+            // Using the Graph database to get all the users
+            var users = await _graphClient.GetAllUsers(null);
+            viewModel.Friends = JsonConvert.DeserializeObject<RootObject>(users).Value;
 
             // Connect to the Azure Table
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
@@ -37,10 +62,9 @@ namespace AzureChallengeNetwork.Website.Controllers
             using (var db = new AzureChallengeContext())
             {
                 // Loading the last 100 posts by creation date
-                var posts =  db.Userposts.OrderByDescending(a => a.CreationDateTime).Take(100).ToList();
+                List<Userpost> posts =  db.Userposts.OrderByDescending(a => a.CreationDateTime).Take(100).ToList();
                 foreach (var post in posts)
                 {
-
                     var searchQuery = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal,post.Id.ToString());
                     TableQuery<ImagePost> exQuery = new TableQuery<ImagePost>().Where(searchQuery);
 
@@ -52,14 +76,21 @@ namespace AzureChallengeNetwork.Website.Controllers
                         ImagePosts = results
                     };
 
-                    viewModel.Posts.Add(postModel);
+                    // Looking up the user in the friends list (to safe some calls)
+                    postModel.PostedByUser = viewModel.Friends.First(a => a.ObjectId == post.UserObjectId);
 
+                    // Using the Graph database to get the user 
+                    /*
+                    var user = await _graphClient.GetUserByObjectId(post.UserObjectId.ToString());
+                    UserProfile profile = JsonConvert.DeserializeObject<UserProfile>(user);
+                    post.UserName = profile.DisplayName;
+                    */
+                    viewModel.Posts.Add(postModel);
                 }
             }
 
             return View(viewModel);
         }
-
 
         [HttpPost]
         public ActionResult Save(ShareUpdateForm shareUpdateForm)
@@ -77,7 +108,8 @@ namespace AzureChallengeNetwork.Website.Controllers
                 var userPost = new Userpost
                 {
                     Text = shareUpdateForm.Message,
-                    CreationDateTime = DateTime.Now
+                    CreationDateTime = DateTime.Now,
+                    UserObjectId = _userObjectId
                 };
 
                 db.Userposts.Add(userPost);
@@ -122,5 +154,10 @@ namespace AzureChallengeNetwork.Website.Controllers
             return RedirectToAction("Index");
         }
 
+    }
+
+    public class RootObject
+    {
+        public List<UserProfile> Value { get; set; }
     }
 }

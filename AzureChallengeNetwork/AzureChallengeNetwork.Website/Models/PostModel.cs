@@ -17,5 +17,6 @@ namespace AzureChallengeNetwork.Website.Models
 
         public Userpost UserPost { get; set; }
 
+        public UserProfile PostedByUser { get; set; }
     }
 }

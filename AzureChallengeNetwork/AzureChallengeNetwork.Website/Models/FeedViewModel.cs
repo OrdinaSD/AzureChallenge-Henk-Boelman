@@ -15,5 +15,6 @@ namespace AzureChallengeNetwork.Website.Models
         public ShareUpdateForm ShareUpdateForm { get; internal set; }
 
         public List<PostModel> Posts { get; internal set; }
+        public List<UserProfile> Friends { get; set; }
     }
 }

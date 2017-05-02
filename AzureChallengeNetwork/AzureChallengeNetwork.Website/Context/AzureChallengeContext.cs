@@ -11,6 +11,8 @@ namespace AzureChallengeNetwork.Website.Context
     {
         public AzureChallengeContext() : base("name=AzureChallengeSQLConnection")
         {
+            // Disable Migrations
+            Database.SetInitializer<AzureChallengeContext>(null);
         }
         public DbSet<Userpost> Userposts { get; set; }
     }
