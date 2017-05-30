@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "AzureWebJobsDashboard": "",
+    "blobConn": "",
+    "visionKey": "",
+    "cosmosDbAuthKey": "",
+    "cosmosDbEndpoint": "",
+    "visionEndpoint": ""
+  }
+}

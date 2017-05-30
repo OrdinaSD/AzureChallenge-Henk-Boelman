@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26510.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.Website", "AzureChallengeNetwork.Website\AzureChallengeNetwork.Website.csproj", "{C2F2B1A3-DB40-45A5-B5F7-38359368481E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.WebJob.ImageResizer", "AzureChallengeNetwork.WebJob.ImageResizer\AzureChallengeNetwork.WebJob.ImageResizer.csproj", "{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureChallengeNetwork.Function.Vision", "AzureChallengeNetwork.Function.Vision\AzureChallengeNetwork.Function.Vision.csproj", "{322152BC-09EE-4938-AD60-A2140EC70C96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.Shared", "AzureChallengeNetwork.Shared\AzureChallengeNetwork.Shared.csproj", "{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBBF44E-2E1E-4ADE-A944-D7C2101BDC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322152BC-09EE-4938-AD60-A2140EC70C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322152BC-09EE-4938-AD60-A2140EC70C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322152BC-09EE-4938-AD60-A2140EC70C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322152BC-09EE-4938-AD60-A2140EC70C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
