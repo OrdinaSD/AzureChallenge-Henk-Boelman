@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.WebJo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureChallengeNetwork.Function.Vision", "AzureChallengeNetwork.Function.Vision\AzureChallengeNetwork.Function.Vision.csproj", "{322152BC-09EE-4938-AD60-A2140EC70C96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureChallengeNetwork.Shared", "AzureChallengeNetwork.Shared\AzureChallengeNetwork.Shared.csproj", "{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{322152BC-09EE-4938-AD60-A2140EC70C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322152BC-09EE-4938-AD60-A2140EC70C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322152BC-09EE-4938-AD60-A2140EC70C96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13F1A83A-237F-47BB-9DF4-EAB74D61F73F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,9 +13,6 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.0-alpha3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AzureChallengeNetwork.Shared\AzureChallengeNetwork.Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Extensions">
@@ -26,10 +23,10 @@
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="local - Copy.settings.json">
+    <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="local.settings.json">
+    <None Update="_local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

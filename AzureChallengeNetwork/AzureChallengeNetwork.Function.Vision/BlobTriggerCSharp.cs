@@ -3,13 +3,14 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web.Script.Serialization;
-using AzureChallengeNetwork.Shared.Models;
+using AzureChallengeNetwork.Function.Vision.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.ProjectOxford.Vision.Contract;
+
 
 namespace AzureChallengeNetwork.Function.Vision
 {
@@ -40,7 +41,7 @@ namespace AzureChallengeNetwork.Function.Vision
 
             var visionResult = result.Result;
 
-            var insights = new ImageInsights
+            var insights = new ImageInsights()
             {
                 ImageId = name,
                 Tags = visionResult.Tags.Select(a => a.Name).ToArray(),
