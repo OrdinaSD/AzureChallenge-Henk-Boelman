@@ -22,6 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Feed", "Index", "Feed")</li>
+                    <li>@Html.ActionLink("Image Search", "ImageSearch", "Home")</li>
                 </ul>
                 @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {

@@ -20,6 +20,7 @@ namespace AzureChallengeNetwork.Function.Vision
         [FunctionName("BlobTriggerCSharp")]        
         public static async void Run([BlobTrigger("images/{name}", Connection = "blobConn")]Stream myBlob, string name, TraceWriter log)
         {
+
             string cosmosDbEndpoint = ConfigurationManager.AppSettings["cosmosDbEndpoint"];
             string cosmosDbAuthKey = ConfigurationManager.AppSettings["cosmosDbAuthKey"];
             string cosmosDbDatabaseName = "Insights";

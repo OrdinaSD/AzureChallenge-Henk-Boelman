@@ -40,7 +40,7 @@ namespace AzureChallengeNetwork.WebJob.ImageResizer
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("images");
+            CloudBlobContainer container = blobClient.GetContainerReference("images-thumbs");
            
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(imagePost.Filename);
             CloudBlockBlob blockBlobOut = container.GetBlockBlobReference("thumb_" + imagePost.Filename);

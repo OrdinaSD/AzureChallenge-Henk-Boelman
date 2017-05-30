@@ -1,12 +1,12 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "",
-    "AzureWebJobsDashboard": "",
-    "blobConn": "",
-    "visionKey": "",
-    "cosmosDbAuthKey": "",
-    "cosmosDbEndpoint": "",
-    "visionEndpoint": ""
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=henkboelman;AccountKey=oxdyQeN+b4YXiJvLVdg78v6IYiB+UKrMxCQ0OjkFHHkUCpjThqOtkzYU8orCzHl2XAuZqweDhWWOZi6yNvr8CQ==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsDashboard": "DefaultEndpointsProtocol=https;AccountName=henkboelman;AccountKey=oxdyQeN+b4YXiJvLVdg78v6IYiB+UKrMxCQ0OjkFHHkUCpjThqOtkzYU8orCzHl2XAuZqweDhWWOZi6yNvr8CQ==;EndpointSuffix=core.windows.net",
+    "blobConn": "DefaultEndpointsProtocol=https;AccountName=henkboelman;AccountKey=oxdyQeN+b4YXiJvLVdg78v6IYiB+UKrMxCQ0OjkFHHkUCpjThqOtkzYU8orCzHl2XAuZqweDhWWOZi6yNvr8CQ==;EndpointSuffix=core.windows.net",
+    "visionKey": "957cd278119b42c196f00e624c658c0a",
+    "cosmosDbAuthKey": "RrPA0o8FbgVVlvNpg8ejyKxvyrc0G0XJNYVn23GAXa2GMOppLGYzstdbwq0GLKAo1gxxy0jQGdiB8VbhoyQ1Ww==",
+    "cosmosDbEndpoint": "https://henkboelman.documents.azure.com:443/",
+    "visionEndpoint": "https://westeurope.api.cognitive.microsoft.com/vision/v1.0"
   }
 }

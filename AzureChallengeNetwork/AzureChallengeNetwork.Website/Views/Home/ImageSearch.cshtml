@@ -1,0 +1,58 @@
+﻿@model Microsoft.Azure.Search.Models.DocumentSearchResult<AzureChallengeNetwork.Website.Models.ImageInsight>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Henk's Social</h1>
+    <form method="get">
+        <input type="text" name="keyword"/>
+        <button type="submit">Search</button>
+    </form>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-3">
+        <h2>Filters</h2>
+        
+        @foreach (var facet in Model.Facets)
+        {
+
+            <h3>@facet.Key</h3>
+            <ul>
+                @foreach (var value in facet.Value)
+                {
+                <li><a href="?tag=@value.Value">@value.Value</a> (@value.Count)</li>
+                }
+            </ul>
+
+        }
+
+    </div>
+
+    <div class="col-lg-9">
+        <h2>Zoek resultaten</h2>
+
+        @foreach (var searchResult in Model.Results)
+        {<div class="row">
+        <div class="col-lg-2">
+            <img src="@($"https://henkboelman.blob.core.windows.net/images/{searchResult.Document.ImageId}")" class="img-responsive" />
+        </div>
+        <div class="col-lg-8">
+
+            <h4>@searchResult.Document.Caption</h4>
+            @foreach (var tag in searchResult.Document.Tags)
+            {
+                @tag <span> / </span>
+            }
+        </div>
+
+
+
+
+    </div>
+    <hr />
+        }
+    </div>
+</div>
