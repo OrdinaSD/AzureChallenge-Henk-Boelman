@@ -8,6 +8,7 @@ using Microsoft.Bot.Builder.Luis.Models;
 namespace AzureChallengeNetwerk.Bot.Dialogs
 {
 
+    [Serializable]
     public class ConfigLuisModelAttribute : LuisModelAttribute
     {
         public ConfigLuisModelAttribute(string modelID, string subscriptionKey)

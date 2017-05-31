@@ -53,7 +53,7 @@ namespace AzureChallengeNetwerk.Bot.Dialogs
                 var cards = results.Results.Select(h => new HeroCard
                 {
                     Title = h.Document.ImageId,
-                    Images = new[] { new CardImage(_imageBaseUrl, h.Document.ImageId) },
+                    Images = new[] { new CardImage(_imageBaseUrl + h.Document.ImageId) },
                     Text = h.Document.Caption
                 });
                 message.AttachmentLayout = AttachmentLayoutTypes.Carousel;
